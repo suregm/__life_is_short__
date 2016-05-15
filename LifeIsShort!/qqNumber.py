@@ -2,6 +2,7 @@ __author__ = 'sure GM' '2016/5/16 0:25'
 # coding: UTF-8
 
 # now the time is 02:53 2016/5/16
+# 03:03 Sure, good night!
 
 # 有5名某界大佬xiaoyun、xiaohong、xiaoteng、xiaoyi和xiaoyang，其QQ号分别是88888、5555555、11111、1234321和1212121，用字典将这些数据组织起来。编程实现以下两个功能：
 # （1）用户输入某一个大佬的姓名后可以输出其QQ号，如果输入的姓名不在字典中则返回提示信息并允许再次输入；
