@@ -1,3 +1,5 @@
+from statsmodels.tsa.vector_ar.tests.example_svar import end
+
 __author__ = 'sure GM' '2016/5/16 0:25'
 # coding: UTF-8
 
