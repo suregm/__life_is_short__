@@ -19,17 +19,17 @@ print(qqInfo)
 
 
 def findQQ(qqInfo):
-    nameIsExist = True
-    while nameIsExist:
+    nameExist = True
+    while nameExist:
         name = input("Please input the name:")
         if name == "-1":
-            nameIsExist = False
+            nameExist = False
             break
         elif qqInfo.keys().__contains__(name):
         # elif name in qqInfo:
             print("%s's QQ number is %s" % (name, str(qqInfo[name])))
         else:
-            print("%s is not exist, pls input a name again." % name)
+            print("%s does not exist, pls input a name again." % name)
             findQQ(qqInfo)
             break
 
