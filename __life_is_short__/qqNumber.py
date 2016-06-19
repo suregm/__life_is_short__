@@ -1,3 +1,5 @@
+from whoosh.lang.morph_en import end
+
 __author__ = 'sure GM' '2016/5/16 0:25'
 # coding: UTF-8
 
@@ -38,7 +40,8 @@ def findAllNiceQQNumber(qqInfo):
     print("Who has the nice QQ number?")
     for name in qqInfo.keys():
         if len(str(qqInfo[name])) <= 5:
-            print(name, end=' ')
+            # print(name, end=' ')
+            print(name)
     print()
 
 
