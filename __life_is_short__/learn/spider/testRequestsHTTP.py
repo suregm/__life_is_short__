@@ -41,3 +41,18 @@ print(r3.text)
 # put方法
 # 同post方法，但是会将原有数据覆盖。
 
+
+# requests.request(method=, url=, **kwargs)
+# method: 请求方式，共7种，对应get/head/post/put/patch/delete/options.
+# **kwargs: 控制访问的参数，共13个，均为可选项
+#   params: 字典或字节序列，作为参数增加到url中
+kv = {'key1': 'value1', 'key2': 'value2'}
+r = requests.request('GET', 'http://gomx.win/ws', params=kv)
+print(r.url)    # http://gomx.win/ws?key2=value2&key1=value1
+#   data: 字典、字节序列或文件对象，作为Requests的内容
+r = requests.request('POST', 'http://gomx.win/ws', data=kv)
+body = '主体内容'
+r = requests.request('POST', 'http://gomx.win/ws', data=body)
+#   json: JSON格式的数据，作为Requests的内容
+r = requests.request('POST', 'http://gomx.win/ws', json=kv)
+#   headers: 字典，HTTP定制头
