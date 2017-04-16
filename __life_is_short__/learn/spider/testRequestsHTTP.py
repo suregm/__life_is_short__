@@ -34,6 +34,10 @@ r3 = requests.post('http://gomx.win', data = 'DeepBLUE')
 print(r3.text)
 # 像URL post一个字符串，自动编码为data
 {
-    "data": "DeepBLUE"
-    "form": {},
+    "data": "DeepBLUE",
+    "form": {}
 }
+
+# put方法
+# 同post方法，但是会将原有数据覆盖。
+
