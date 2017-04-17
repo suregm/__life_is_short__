@@ -45,14 +45,65 @@ print(r3.text)
 # requests.request(method=, url=, **kwargs)
 # method: 请求方式，共7种，对应get/head/post/put/patch/delete/options.
 # **kwargs: 控制访问的参数，共13个，均为可选项
+
 #   params: 字典或字节序列，作为参数增加到url中
 kv = {'key1': 'value1', 'key2': 'value2'}
 r = requests.request('GET', 'http://gomx.win/ws', params=kv)
 print(r.url)    # http://gomx.win/ws?key2=value2&key1=value1
+
 #   data: 字典、字节序列或文件对象，作为Requests的内容
 r = requests.request('POST', 'http://gomx.win/ws', data=kv)
 body = '主体内容'
 r = requests.request('POST', 'http://gomx.win/ws', data=body)
+
 #   json: JSON格式的数据，作为Requests的内容
 r = requests.request('POST', 'http://gomx.win/ws', json=kv)
+
 #   headers: 字典，HTTP定制头
+hd = {'user-agent': 'chrome/10'}    # 浏览器模拟
+r = requests.request('POST', 'http://gomx.win', headers=hd)
+
+#   cookies: 字典或CookieJar，Requests中的cookie
+
+#   auth: 元组，支持HTTP认证功能
+
+#   file: 字典类型，传输文件
+fs = {'file': open('sure.txt', 'rb')}
+r = requests.request('POST', 'http://gomx.win', file=fs)
+
+#   timeout: 设定超时时间，秒为单位
+r = requests.request('GET', 'http://gomx.win', timeout=10)
+
+#   proxies: 字典类型，设定访问代理服务器，可以增加登录认证
+pxs = {'http': 'http://user:pass@10.10.10.1:1234',
+       'https': 'https://10.10.10.1:4321'}
+r = requests.request('GET', 'http://gomx.win', proxies=pxs)
+
+#   allow_redirects: True/False，默认为True，重定向开关
+
+#   stream: True/False，默认为True，获取内容立即下载开关
+
+#   verify: True/False，默认为True，认证SSL证书开关
+
+#   cert: 本地SSL证书路径
+
+
+
+# requests.get(url，params=None, **kwargs)
+# params: url中的额外参数，字典或字节流格式，可选
+# **kwargs是除了headers之外的12个可选参数
+
+# requests.head(url, **kwargs)
+# **kwargs是13个可选控制访问参数
+
+# requests.post(url=, data=None, json=None, **kwargs)
+# data: 字典、字节序列或文件，Requests的内容
+# json: JSON格式的数据，Requests的内容
+# **kwargs: 除data、json之外的11个控制访问的参数
+
+# requests.patch(url=, data=None, **kwargs)
+# data: 字典、字节序列或文件，Requests的内容
+# **kwargs: 除data之外的12个控制访问的参数
+
+# requests.delete(url=, **kwargs)
+# **kwargs: 13个控制访问的参数
