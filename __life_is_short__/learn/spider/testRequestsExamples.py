@@ -47,3 +47,16 @@ except:
     print("爬取失败！")
 
 
+# IP地址归属地的查询
+# 挖掘网站后台api，可以模拟手工点击按钮、输入文本等提交数据操作
+ipaddress = '202.204.80.112'
+url = 'http://m.ip138.com/ip.asp?ip='
+try:
+    r = requests.get(url + ipaddress)
+    print(r.raise_for_status())
+    r.encoding = r.apparent_encoding
+    print(r.text[-500:])
+except:
+    print("爬取失败！")
+
+
