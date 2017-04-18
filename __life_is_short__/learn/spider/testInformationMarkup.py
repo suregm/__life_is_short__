@@ -2,7 +2,7 @@
 
 
 # 目前国际公认的信息标记语言有三种：
-# XML eXtensible Markup Language
+# XML eXtensible Markup Language，HTML属于XML的一种
 # JSON
 # YAML
 
@@ -25,8 +25,7 @@
 # key : value     # 无双引号
 
 # name :    # 从属关系使用和Python一样的缩进来表达
-#     newName : newValue
-#     oldName : oldValue
+#     subkey : subvalue
 
 # name :    # 并列关系使用“-”表达
 # -newValue
@@ -37,3 +36,12 @@
 
 # #comment
 # 使用“#”表示注释
+
+
+# 三种信息标记语言的比较
+# XML 最早的通用信息标记语言，可扩展性好，但是繁琐。适用于Internet上信息交互和传递。
+# JSON 信息有类型，适合程序处理。适用于移动应用云端和节点的信息通信（接口处理），无注释。
+# YAML 信息无类型，文本信息比例最高，可读性好。适用于各类系统的配置文件，有注释易读。
+
+
+# 信息提取的一般方法
