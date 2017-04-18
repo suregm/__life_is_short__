@@ -4,6 +4,32 @@ import requests
 # Beautiful Soup库是解析、遍历、维护“标签树”的功能库
 
 url = 'http://python123.io/ws/demo.html'
+# <html>
+#  <head>
+#   <title>
+#    This is a python demo page
+#   </title>
+#  </head>
+#  <body>
+#   <p class="title">
+#    <b>
+#     The demo python introduces several python courses.
+#    </b>
+#   </p>
+#   <p class="course">
+#    Python is a wonderful general-purpose programming language. You can learn Python from novice to professional by tracking the following courses:
+#    <a class="py1" href="http://www.icourse163.org/course/BIT-268001" id="link1">
+#     Basic Python
+#    </a>
+#    and
+#    <a class="py2" href="http://www.icourse163.org/course/BIT-1001870001" id="link2">
+#     Advanced Python
+#    </a>
+#    .
+#   </p>
+#  </body>
+# </html>
+
 
 r = requests.get(url)
 print(r.text)
@@ -102,10 +128,35 @@ for parent in soup.a.parents:
 # body
 # html
 # [document]
+print("\n======================\n")
 
 
 # 平行遍历
+# 平行遍历发生在同一个父节点下的各节点间
 # .next_sibling 返回按照HTML文本顺序的下一个平行节点标签
 # .previous_sibling 返回按照HTML文本顺序的上一个平行节点标签
 # .next_siblings 迭代返回按照HTML文本顺序的后续所有平行节点标签
 # .previous_siblings 返回按照HTML文本顺序的前置所有平行节点标签
+print(soup.a.next_sibling)
+print(soup.a.next_sibling.next_sibling)
+print(soup.a.previous_sibling)
+print(soup.a.previous_sibling.previous_sibling) # 返回None，已无再前一个平行节点标签
+print(soup.a.parent)
+
+# 循环遍历后续节点
+for sibling in soup.a.next_siblings:
+    print(sibling)
+print("\n======================\n")
+# 循环遍历前续节点
+for sibling in soup.a.previous_sibling:
+    print(sibling)
+print("\n======================\n")
+
+
+
+# 基于bs4库的HTML格式输出
+# bs4转换为UTF-8
+soup.prettify() # 增加换行符，美观
+newSoup = BeautifulSoup("<p>《中文》</p>", "html.parser")
+print(newSoup.p.string)
+print(newSoup.p.prettify())
