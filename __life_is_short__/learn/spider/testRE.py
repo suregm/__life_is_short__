@@ -34,9 +34,9 @@ re.compile("(([1-9]?\d | 1\d{2} | 2[0-4]\d | 25[0-5]).){3}([1-9]?\d | 1\d{2} | 2
 # re.search(pattern, string, flags=0) # 返回match对象，match.group(0)
 # re.match()  # 从头位置开始匹配，返回匹配到的match对象
 # re.findall()    # 返回对象的列表类型
-# re.split()  # 返回分割对象的列表类型
+# re.split(pattern, string, maxsplit=0, flags=0)  # 返回分割对象的列表类型 maxsplit最大分割数，剩余部分作为最后一个元素输出
 # re.finditer()   #返回一个匹配结果的迭代类型，每个迭代元素是match对象
-# re.sub()    # 替换匹配的子字符串，返回替换后的字符串
+# re.sub(pattern, repl, string, count=0, flags=0)    # 替换匹配的子字符串，返回替换后的字符串 repl是替换匹配字符串的字符串 count匹配的最大替换次数
 
 # flags: 控制标记
 # re.I re.IGNORECASE 忽略正则表达式的大小写
@@ -53,4 +53,17 @@ if match:
 match = re.match(r'[1-9]\d{5}', "430070 Wuhan")
 # if match: # 加上if判断是否为空
 print(match.group(0))   # 430070
+
+ls = re.findall(r'[1-9]\d{5}', "Wuhan430070 Langkou442100")
+print(ls)
+
+ls = re.split(r'[1-9]\d{5}', "Wuhan430070 Langkou442100")
+print(ls)   # ['Wuhan', ' Langkou', '']
+ls = re.split(r'[1-9]\d{5}', "Wuhan430070 Langkou442100", maxsplit=1)
+print(ls)
+
+# 迭代类型使用循环迭代
+for m in re.finditer(r'[1-9]\d{5}', "Wuhan430070 Langkou442100"):
+    if m:
+        print(m.group(0))
 
