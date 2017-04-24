@@ -1,7 +1,7 @@
 import re
 
-
-#
+# 正则表达式由字符和操作符构成
+# 常用操作符
 # .      任意单个字符
 # []      字符集，约定取值范围 [abc]表示a/b/c中的任意一个，[a-z]
 # [^]      非字符集，给出排除范围 [^abc]表示除a/b/c之外的单个字符
@@ -31,7 +31,7 @@ re.compile("(([1-9]?\d | 1\d{2} | 2[0-4]\d | 25[0-5]).){3}([1-9]?\d | 1\d{2} | 2
 
 
 # re库主要功能函数
-# re.search(pattern, string, flags=0) # 返回match对象，match.group(0)
+# re.search(pattern, string, flags=0) # 返回第一次匹配到的match对象，match.group(0)
 # re.match()  # 从头位置开始匹配，返回匹配到的match对象
 # re.findall()    # 返回子串的列表类型
 # re.split(pattern, string, maxsplit=0, flags=0)  # 返回分割对象的列表类型 maxsplit最大分割数，剩余部分作为最后一个元素输出
@@ -83,9 +83,41 @@ print(rst)  # <_sre.SRE_Match object; span=(5, 11), match='430070'>
 
 # r'[1-9]\d{5}'只是正则表达式的字符串表示，compile后的regex才是正则表达式对象，此时regex可以使用对象方法
 regex = re.compile(r'[1-9]\d{5}', flags=0)
-regex.search()
-regex.match()
-regex.findall()
-regex.split()
-regex.finditer()
-regex.sub()
+# regex.search()
+# regex.match()
+# regex.findall()
+# regex.split()
+# regex.finditer()
+# regex.sub()
+
+
+
+# Match对象
+match = re.search(r'[1-9]\d{5}', "Wuhan430070 Langkou442100")
+if match:
+    print(match.group(0))
+    print(type(match))  # <class '_sre.SRE_Match'>
+    # Match对象的属性
+    print(match.string)
+    print(match.re) # pattern对象（正则表达式）
+    print(match.pos)    # 正则表达式搜索文本的开始位置
+    print(match.endpos)
+    # Match对象的方法
+    print(match.group(0))
+    print(match.start())    # 匹配字符串在原始字符串的开始位置
+    print(match.end())
+    print(match.span()) # 返回两者二元关系(.start(), .end()) (5, 11)
+
+
+
+# 贪婪匹配
+match = re.search(r'PY.*N', 'PYANBNCNDN')
+print(match.group(0))   # 同时匹配长短不同的多项，返回哪一个呢？ PYANBNCNDN
+# Re库默认采用贪婪匹配，即输出匹配最长的子串。
+match = re.search(r'PY.*?N', 'PYANBNCNDN')  #增加?，采用最小匹配
+print(match.group(0))   # 最小匹配 PYAN
+# 最小匹配操作符
+# *? 前一个字符0次或无限次扩展，最小匹配
+# +? 前一个字符1次或无限次扩展，最小匹配
+# ?? 前一个字符0次或1次扩展，最小匹配
+# {m,n}? 扩展前一个字符m至n次（含n），最小匹配
