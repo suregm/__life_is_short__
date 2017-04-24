@@ -33,7 +33,7 @@ re.compile("(([1-9]?\d | 1\d{2} | 2[0-4]\d | 25[0-5]).){3}([1-9]?\d | 1\d{2} | 2
 # re库主要功能函数
 # re.search(pattern, string, flags=0) # 返回match对象，match.group(0)
 # re.match()  # 从头位置开始匹配，返回匹配到的match对象
-# re.findall()    # 返回对象的列表类型
+# re.findall()    # 返回子串的列表类型
 # re.split(pattern, string, maxsplit=0, flags=0)  # 返回分割对象的列表类型 maxsplit最大分割数，剩余部分作为最后一个元素输出
 # re.finditer()   #返回一个匹配结果的迭代类型，每个迭代元素是match对象
 # re.sub(pattern, repl, string, count=0, flags=0)    # 替换匹配的子字符串，返回替换后的字符串 repl是替换匹配字符串的字符串 count匹配的最大替换次数
@@ -67,3 +67,25 @@ for m in re.finditer(r'[1-9]\d{5}', "Wuhan430070 Langkou442100"):
     if m:
         print(m.group(0))
 
+# 正则替换
+str = re.sub(r'[1-9]\d{5}', ':sureGM', "Wuhan430070 Langkou442100")
+print(str)
+
+
+# Re库的等价用法
+# 函数式用法：一次性操作
+rst = re.search(r'[1-9]\d{5}', "Wuhan430070 Langkou442100")
+# 面向对象用法：编译后的多次操作
+pat = re.compile(r'[1-9]\d{5}', flags=0)    #将正则表达式的字符串形式编译成正则表达式对象
+rst = pat.search("Wuhan430070 Langkou442100")
+print(rst)  # <_sre.SRE_Match object; span=(5, 11), match='430070'>
+
+
+# r'[1-9]\d{5}'只是正则表达式的字符串表示，compile后的regex才是正则表达式对象，此时regex可以使用对象方法
+regex = re.compile(r'[1-9]\d{5}', flags=0)
+regex.search()
+regex.match()
+regex.findall()
+regex.split()
+regex.finditer()
+regex.sub()
