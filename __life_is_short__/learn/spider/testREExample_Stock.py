@@ -19,7 +19,7 @@ def getStockList(lst, stockUrl):
     for i in a:
         try:
             href = i.attrs['href']
-            lst.append(href.findall(r'[s][hz]\d{6}', href)[0])
+            lst.append(re.findall(r'[s][hz]\d{6}', href)[0])
         except:
             continue
     return ""
@@ -46,10 +46,10 @@ def getStockInfo(lst, stockUrl, fpath):
                 val = valueList[i].text
                 infoDict[key] = val
 
-            with open(fpath, 'a', encoding='utf-8') as f:
+            with open(fpath, 'a', encoding='utf-8') as f:   # 保存为文件
                 f.write(str(infoDict) + "\n")
         except:
-            traceback.print_exc()
+            traceback.print_exc()   # 回溯异常
             continue
 
 def main():
