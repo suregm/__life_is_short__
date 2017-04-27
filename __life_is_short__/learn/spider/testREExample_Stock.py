@@ -19,7 +19,7 @@ def getStockList(lst, stockUrl):
     for i in a:
         try:
             href = i.attrs['href']
-            lst.append(re.findall(r'[s][hz]\d{6}', href)[0])
+            lst.append(href.findall(r'[s][hz]\d{6}', href)[0])
         except:
             continue
     return ""
@@ -33,9 +33,9 @@ def getStockInfo(lst, stockUrl, fpath):
                 continue
             infoDict = {}
             soup = BeautifulSoup(html, 'html.parser')
-            stockInfo = soup.find('div', attrs={'class':'stock-bets'})
+            stockInfo = soup.find('div', attrs={'class': 'stock-bets'})
 
-            name = stockInfo.find_all(sttrs={'class':'bets-name'})[0]
+            name = stockInfo.find_all(attrs={'class': 'bets-name'})[0]
             infoDict.update({'股票名称': name.text.split()[0]})
 
             keyList = stockInfo.find_all('dt')
@@ -55,7 +55,7 @@ def getStockInfo(lst, stockUrl, fpath):
 def main():
     stock_list_url = "http://quote.eastmoney.com/stocklist.html"
     stock_info_url = "https://gupiao.baidu.com/stock/"
-    output_file = "D://StockInfo.txt"
+    output_file = "D:/StockInfo.txt"
     slist = []
     getStockList(slist, stock_list_url)
     getStockInfo(slist, stock_info_url, output_file)
