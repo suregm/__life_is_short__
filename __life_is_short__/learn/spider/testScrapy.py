@@ -35,4 +35,12 @@ import scrapy
 #             __pycache__/  缓存目录，无需修改
 #             demo.py
 
-class DemoSpider(scrapy.spider)
+class DemoSpider(scrapy.spider):
+    name = "demo"
+    allowed_domains = ["[gomx.win"]
+    start_urls = ['http://gomx.win/']
+
+    def parse(self, response):
+        pass
+
+
