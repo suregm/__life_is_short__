@@ -3,17 +3,28 @@ import requests
 from bs4 import BeautifulSoup
 import traceback
 
-def getHTMLText(url):
+
+# 速度提高：
+# 1.编码识别的优化
+# r.apparent_encoding需要很长时间，如果知道网页的编码方式，可以手工赋值
+# 2.增加进度动态显示
+# 进度条
+
+
+# def getHTMLText(url):   # 增加code='utf-8'
+def getHTMLText(url, code='utf-8'):
     try:
         r = requests.get(url, timeout=30)
         r.raise_for_status()
-        r.encoding = r.apparent_encoding
+        # r.encoding = r.apparent_encoding
+        r.encoding = code
         return r.text
     except:
         return ""
 
 def getStockList(lst, stockUrl):
-    html = getHTMLText(stockUrl)
+    # html = getHTMLText(stockUrl)
+    html = getHTMLText(stockUrl, 'GB2312')
     soup = BeautifulSoup(html, 'html.parser')
     a = soup.find_all('a')
     for i in a:
@@ -25,9 +36,10 @@ def getStockList(lst, stockUrl):
     return ""
 
 def getStockInfo(lst, stockUrl, fpath):
+    count = 0
     for stock in lst:
         url = stockUrl + stock + ".html"
-        html = getHTMLText(url)
+        html = getHTMLText(url) # 不加code参数时，默认为'utf-8'编码
         try:
             if html == "":
                 continue
@@ -48,7 +60,12 @@ def getStockInfo(lst, stockUrl, fpath):
 
             with open(fpath, 'a', encoding='utf-8') as f:   # 保存为文件
                 f.write(str(infoDict) + "\n")
+                count = count + 1
+                # 不换行\r
+                print('\r当前进度：{:.2f}'.format(count*100/len(lst)), end='')
         except:
+            count = count + 1
+            print('\r当前进度：{:.2f}'.format(count * 100 / len(lst)), end='')
             traceback.print_exc()   # 回溯异常
             continue
 
