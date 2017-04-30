@@ -37,10 +37,35 @@ import scrapy
 
 class DemoSpider(scrapy.spider):
     name = "demo"
-    allowed_domains = ["[gomx.win"]
+    allowed_domains = ["[gomx.win"]     # 可不需要
     start_urls = ['http://gomx.win/']
 
-    def parse(self, response):
+    def parse(self, response):  # parse()用于处理响应，解析内容形成字典，发现新的URL爬取请求
+        fname = response.url.split('/')[-1]
+        with open(fname, 'wb') as f:
+            f.write(response.body)
+        self.log('Saved file %s.', fname)
         pass
 
+    #完整版解析 start_requests等价于start_urls
+    def start_requests(self):
+        urls = ['http://gomx.win/']
+        for url in urls:
+            yield scrapy.Request(url = url, callback = self.parse())
+
+
+
+# yield 生成器
+# 1.更节省空间
+# 2.响应更迅速
+def gen(n):
+    for i in range(n):
+        yield i ** 2
+
+gen()
+
+# 对比
+def square(n):
+    ls = [i ** 2 for i in range(n)]
+    return ls
 
